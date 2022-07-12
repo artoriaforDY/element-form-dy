@@ -10,7 +10,7 @@
 ### npm（推荐方式）
 
 ```bash
-$ npm install xt-element-form
+$ npm install element-form-dy
 ```
 
 ### script
@@ -152,6 +152,9 @@ export default {
 | submit | 提交按钮的点击事件 | Object | (form, valid) |
 
 ## 更新日志
+### 1.9.3
+1. 下拉框添加 disabled
+
 ### 1.9.0
 1. 添加 validateField，单项表单验证
 
