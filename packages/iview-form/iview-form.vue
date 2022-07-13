@@ -1,25 +1,5 @@
 <script>
-const getPrefix = (tag, lib) => {
-  let iviewMap = {
-    'form': 'i-form',
-    'form-item': 'form-item',
-    'input': 'i-input',
-    'select': 'i-select',
-    'option': 'i-option',
-    'checkbox': 'checkbox',
-    'checkbox-group': 'checkbox-group',
-    'date-picker': 'date-picker',
-    'time-picker': 'time-picker',
-    'radio': 'radio',
-    'radio-group': 'radio-group',
-    'switch': 'i-switch',
-    'slider': 'slider',
-    'button': 'i-button',
-    'row': 'row',
-    'col': 'i-col',
-    'input-number': 'input-number',
-    'cascader': 'cascader'
-  }
+const getPrefix = (tag) => {
   let elementMap = {
     'form': 'el-form',
     'form-item': 'el-form-item',
@@ -41,7 +21,7 @@ const getPrefix = (tag, lib) => {
     'cascader': 'el-cascader'
   }
 
-  return lib === 'iview' ? iviewMap[tag] : elementMap[tag]
+  return elementMap[tag]
 }
 
 export default {
@@ -69,11 +49,6 @@ export default {
     enterSubmit: {
       type: Boolean,
       default: false
-    },
-    // 默认 ui 库
-    lib: {
-      type: String,
-      default: 'iview'
     },
     // 默认标签宽度
     'label-width': {
@@ -136,11 +111,11 @@ export default {
     }
   },
   render(h) {
-    return h(getPrefix('form', this.lib), {
+    return h(getPrefix('form'), {
       props: {
         model: this.form,
         rules: this.rules,
-        'label-width': this.lib === 'iview' ? this['labelWidth'] : this['labelWidth'] + 'px',
+        'label-width': this['labelWidth'] + 'px',
         ...this.options
       },
       ref: 'form',
@@ -240,7 +215,7 @@ export default {
           let children = this.formList[i + j]
           if (!children) break
           let childrenItem = this.getFormItem(h, children, this.getContent(h, children))
-          let childrenParts = h(getPrefix('col', this.lib), {
+          let childrenParts = h(getPrefix('col'), {
             props: {
               span: 24 / grid
             }
@@ -265,7 +240,7 @@ export default {
           let children = this.formList[i + j]
           if (!children) break
           let childrenItem = this.getFormItem(h, children, this.getContent(h, children))
-          let childrenParts = h(getPrefix('col', this.lib), {
+          let childrenParts = h(getPrefix('col'), {
             props: {
               span: 24 / grid
             }
@@ -293,7 +268,7 @@ export default {
           let children = this.formList[i + j]
           if (!children) break
           let childrenItem = this.getFormItem(h, children, this.getContent(h, children))
-          let childrenParts = h(getPrefix('col', this.lib), {
+          let childrenParts = h(getPrefix('col'), {
             props: {
               span: grid[j]
             }
@@ -310,7 +285,7 @@ export default {
       return list
     },
     getRow (h, childrenList) {
-      return h(getPrefix('row', this.lib), {
+      return h(getPrefix('row'), {
         props: {
           gutter: this.gutter
         }
@@ -387,7 +362,7 @@ export default {
             prop: item.key
           }
         }
-        return h(getPrefix('form-item', this.lib), Object.assign(settings, item.settings), [
+        return h(getPrefix('form-item'), Object.assign(settings, item.settings), [
           this.renderTitle(h, item, this.form),
           content
         ])
@@ -412,7 +387,7 @@ export default {
     renderSubmit(h) {
       let btns = []
       if (this.hasSubmitBtn) {
-        btns.push(h(getPrefix('button', this.lib), {
+        btns.push(h(getPrefix('button'), {
           props: {
             type: 'primary'
           },
@@ -422,7 +397,7 @@ export default {
         }, this.submitText))
       }
       if (this.hasResetBtn) {
-        btns.push(h(getPrefix('button', this.lib), {
+        btns.push(h(getPrefix('button'), {
           style: {
             'margin-left': '10px'
           },
@@ -432,7 +407,7 @@ export default {
         }, this.resetText))
       }
 
-      return h(getPrefix('form-item', this.lib), btns)
+      return h(getPrefix('form-item'), btns)
     },
     // 渲染 input
     renderInput(h, item) {
@@ -456,7 +431,7 @@ export default {
       let tag = {
         h,
         item,
-        tagName: getPrefix('input', this.lib),
+        tagName: getPrefix('input'),
         props: {
           clearable: this.clearable,
           ...props
@@ -476,13 +451,13 @@ export default {
       let tag = {
         h,
         item,
-        tagName: getPrefix('select', this.lib),
+        tagName: getPrefix('select'),
         props: {
           clearable: this.clearable,
           ...(item.props || {})
         },
         children: item.options.map(option => {
-          return h(getPrefix('option', this.lib), {
+          return h(getPrefix('option'), {
             props: {
               label: option.text,
               value: option.value,
@@ -506,7 +481,7 @@ export default {
       let tag = {
         h,
         item,
-        tagName: getPrefix('checkbox', this.lib),
+        tagName: getPrefix('checkbox'),
         props,
         children: item.text
       }
@@ -517,10 +492,10 @@ export default {
       let tag = {
         h,
         item,
-        tagName: getPrefix('checkbox-group', this.lib),
+        tagName: getPrefix('checkbox-group'),
         props: item.props || {},
         children: item.options.map(option => {
-          return h(getPrefix('checkbox', this.lib), {
+          return h(getPrefix('checkbox'), {
             props: {
               border: item.border,
               label: option.value,
@@ -536,7 +511,7 @@ export default {
       let tag = {
         h,
         item,
-        tagName: getPrefix('date-picker', this.lib),
+        tagName: getPrefix('date-picker'),
         props: {
           clearable: this.clearable,
           type: item.type,
@@ -554,7 +529,7 @@ export default {
       let tag = {
         h,
         item,
-        tagName: getPrefix('date-picker', this.lib),
+        tagName: getPrefix('date-picker'),
         props: {
           clearable: this.clearable,
           type: item.type,
@@ -567,7 +542,7 @@ export default {
       let tag = {
         h,
         item,
-        tagName: getPrefix('time-picker', this.lib),
+        tagName: getPrefix('time-picker'),
         props: {
           clearable: this.clearable,
           type: item.type,
@@ -585,7 +560,7 @@ export default {
       let tag = {
         h,
         item,
-        tagName: getPrefix('radio', this.lib),
+        tagName: getPrefix('radio'),
         props,
         children: item.text
       }
@@ -596,10 +571,10 @@ export default {
       let tag = {
         h,
         item,
-        tagName: getPrefix('radio-group', this.lib),
+        tagName: getPrefix('radio-group'),
         props: item.props || {},
         children: item.options.map(option => {
-          return h(getPrefix('radio', this.lib), {
+          return h(getPrefix('radio'), {
             props: {
               border: item.border,
               label: option.value,
@@ -615,7 +590,7 @@ export default {
       let tag = {
         h,
         item,
-        tagName: getPrefix('switch', this.lib),
+        tagName: getPrefix('switch'),
         props: item.props || {}
       }
       return this.generateTag(tag)
@@ -625,7 +600,7 @@ export default {
       let tag = {
         h,
         item,
-        tagName: getPrefix('slider', this.lib),
+        tagName: getPrefix('slider'),
         props: item.props || {}
       }
       return this.generateTag(tag)
@@ -635,7 +610,7 @@ export default {
       let tag = {
         h,
         item,
-        tagName: getPrefix('input-number', this.lib),
+        tagName: getPrefix('input-number'),
         props: item.props || {}
       }
       return this.generateTag(tag)
@@ -646,13 +621,9 @@ export default {
       let tag = {
         h,
         item,
-        tagName: getPrefix('cascader', this.lib)
+        tagName: getPrefix('cascader')
       }
-      if (this.lib === 'iview') {
-        props.data = this.getCascaderOptions(item.options)
-      } else {
-        props.options = this.getCascaderOptions(item.options)
-      }
+      props.options = this.getCascaderOptions(item.options)
       tag.props = props
       return this.generateTag(tag)
     },
