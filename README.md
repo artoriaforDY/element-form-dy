@@ -1,6 +1,6 @@
 # xt-element-form
 
-> 让 iview 和 element-ui 的 form 使用起来更加简单。
+> 让 element-ui 的 form 使用起来更加简单。
 
 ## 例子
 [demo][1]
