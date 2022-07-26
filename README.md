@@ -152,6 +152,9 @@ export default {
 | submit | 提交按钮的点击事件 | Object | (form, valid) |
 
 ## 更新日志
+### 1.9.5
+1. title为空时不渲染title的标签
+
 ### 1.9.3
 1. 下拉框添加 disabled
 
