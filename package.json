@@ -24,7 +24,7 @@
   ],
   "repository": {
     "type": "git",
-    "url": "git://github.com/artoriaforDY/xt-element-form.git"
+    "url": "git://github.com/artoriaforDY/element-form-dy.git"
   },
   "dependencies": {
     "element-ui": "^2.3.7",
