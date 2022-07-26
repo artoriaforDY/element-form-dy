@@ -156,7 +156,7 @@ export default {
 1. title为空时不渲染title的标签
 
 ### 1.9.3
-1. 下拉框添加 disabled
+1. 下拉框添加 disabled，用以禁用部分选择项
 
 ### 1.9.0
 1. 添加 validateField，单项表单验证
