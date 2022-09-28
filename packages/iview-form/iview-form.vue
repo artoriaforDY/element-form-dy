@@ -111,8 +111,7 @@ export default {
     }
   },
   render(h) {
-    let create = this.$createElement
-    return create(getPrefix('form'), {
+    return this.$createElement(getPrefix('form'), {
       props: {
         model: this.form,
         rules: this.rules,
@@ -128,8 +127,8 @@ export default {
       }
     }, [
       this.$slots.prepend,
-      this.renderFormList(create),
-      !this.notCtrl && this.renderSubmit(create),
+      this.renderFormList(h),
+      !this.notCtrl && this.renderSubmit(h),
       this.$slots.default
     ])
   },
@@ -668,7 +667,7 @@ export default {
         }
       }
 
-      return h(tagName, {
+      return this.$createElement(tagName, {
         ref: item.ref || `refs${Math.random().toString(36).substr(2, 10)}`,
         props: currProps,
         attrs,
