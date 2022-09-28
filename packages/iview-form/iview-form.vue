@@ -668,6 +668,7 @@ export default {
       }
 
       return h(tagName, {
+        ref: item.ref || `refs${Math.random().toString(36).substr(2, 10)}`,
         props: currProps,
         attrs,
         style: {
