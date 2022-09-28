@@ -152,6 +152,10 @@ export default {
 | submit | 提交按钮的点击事件 | Object | (form, valid) |
 
 ## 更新日志
+
+### 1.9.11
+1. this.$createElement替代h
+
 ### 1.9.10
 1. 添加ref
 
