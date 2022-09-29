@@ -215,7 +215,7 @@ export default {
           let children = this.formList[i + j]
           if (!children) break
           let childrenItem = this.getFormItem(h, children, this.getContent(h, children))
-          let childrenParts = h(getPrefix('col'), {
+          let childrenParts = this.$createElement(getPrefix('col'), {
             props: {
               span: 24 / grid
             }
@@ -240,7 +240,7 @@ export default {
           let children = this.formList[i + j]
           if (!children) break
           let childrenItem = this.getFormItem(h, children, this.getContent(h, children))
-          let childrenParts = h(getPrefix('col'), {
+          let childrenParts = this.$createElement(getPrefix('col'), {
             props: {
               span: 24 / grid
             }
@@ -268,7 +268,7 @@ export default {
           let children = this.formList[i + j]
           if (!children) break
           let childrenItem = this.getFormItem(h, children, this.getContent(h, children))
-          let childrenParts = h(getPrefix('col'), {
+          let childrenParts = this.$createElement(getPrefix('col'), {
             props: {
               span: grid[j]
             }
@@ -285,7 +285,7 @@ export default {
       return list
     },
     getRow (h, childrenList) {
-      return h(getPrefix('row'), {
+      return this.$createElement(getPrefix('row'), {
         props: {
           gutter: this.gutter
         }
@@ -362,7 +362,7 @@ export default {
             prop: item.key
           }
         }
-        return h(getPrefix('form-item'), Object.assign(settings, item.settings), [
+        return this.$createElement(getPrefix('form-item'), Object.assign(settings, item.settings), [
           this.renderTitle(h, item, this.form),
           content
         ])
@@ -387,7 +387,7 @@ export default {
     renderSubmit(h) {
       let btns = []
       if (this.hasSubmitBtn) {
-        btns.push(h(getPrefix('button'), {
+        btns.push(this.$createElement(getPrefix('button'), {
           props: {
             type: 'primary'
           },
@@ -397,7 +397,7 @@ export default {
         }, this.submitText))
       }
       if (this.hasResetBtn) {
-        btns.push(h(getPrefix('button'), {
+        btns.push(this.$createElement(getPrefix('button'), {
           style: {
             'margin-left': '10px'
           },
@@ -407,7 +407,7 @@ export default {
         }, this.resetText))
       }
 
-      return h(getPrefix('form-item'), btns)
+      return this.$createElement(getPrefix('form-item'), btns)
     },
     // 渲染 input
     renderInput(h, item) {
@@ -457,7 +457,7 @@ export default {
           ...(item.props || {})
         },
         children: item.options.map(option => {
-          return h(getPrefix('option'), {
+          return this.$createElement(getPrefix('option'), {
             props: {
               label: option.text,
               value: option.value,
@@ -495,7 +495,7 @@ export default {
         tagName: getPrefix('checkbox-group'),
         props: item.props || {},
         children: item.options.map(option => {
-          return h(getPrefix('checkbox'), {
+          return this.$createElement(getPrefix('checkbox'), {
             props: {
               border: item.border,
               label: option.value,
@@ -574,7 +574,7 @@ export default {
         tagName: getPrefix('radio-group'),
         props: item.props || {},
         children: item.options.map(option => {
-          return h(getPrefix('radio'), {
+          return this.$createElement(getPrefix('radio'), {
             props: {
               border: item.border,
               label: option.value,

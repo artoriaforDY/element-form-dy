@@ -153,12 +153,6 @@ export default {
 
 ## 更新日志
 
-### 1.9.11
-1. this.$createElement替代h
-
-### 1.9.10
-1. 添加ref
-
 ### 1.9.5
 1. title为空时不渲染title的标签
 
