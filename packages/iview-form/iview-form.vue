@@ -111,7 +111,7 @@ export default {
     }
   },
   render(h) {
-    return this.$createElement(getPrefix('form'), {
+    return h(getPrefix('form'), {
       props: {
         model: this.form,
         rules: this.rules,
@@ -215,7 +215,7 @@ export default {
           let children = this.formList[i + j]
           if (!children) break
           let childrenItem = this.getFormItem(h, children, this.getContent(h, children))
-          let childrenParts = this.$createElement(getPrefix('col'), {
+          let childrenParts = h(getPrefix('col'), {
             props: {
               span: 24 / grid
             }
@@ -240,7 +240,7 @@ export default {
           let children = this.formList[i + j]
           if (!children) break
           let childrenItem = this.getFormItem(h, children, this.getContent(h, children))
-          let childrenParts = this.$createElement(getPrefix('col'), {
+          let childrenParts = h(getPrefix('col'), {
             props: {
               span: 24 / grid
             }
@@ -268,7 +268,7 @@ export default {
           let children = this.formList[i + j]
           if (!children) break
           let childrenItem = this.getFormItem(h, children, this.getContent(h, children))
-          let childrenParts = this.$createElement(getPrefix('col'), {
+          let childrenParts = h(getPrefix('col'), {
             props: {
               span: grid[j]
             }
@@ -285,7 +285,7 @@ export default {
       return list
     },
     getRow (h, childrenList) {
-      return this.$createElement(getPrefix('row'), {
+      return h(getPrefix('row'), {
         props: {
           gutter: this.gutter
         }
@@ -362,7 +362,7 @@ export default {
             prop: item.key
           }
         }
-        return this.$createElement(getPrefix('form-item'), Object.assign(settings, item.settings), [
+        return h(getPrefix('form-item'), Object.assign(settings, item.settings), [
           this.renderTitle(h, item, this.form),
           content
         ])
@@ -387,7 +387,7 @@ export default {
     renderSubmit(h) {
       let btns = []
       if (this.hasSubmitBtn) {
-        btns.push(this.$createElement(getPrefix('button'), {
+        btns.push(h(getPrefix('button'), {
           props: {
             type: 'primary'
           },
@@ -397,7 +397,7 @@ export default {
         }, this.submitText))
       }
       if (this.hasResetBtn) {
-        btns.push(this.$createElement(getPrefix('button'), {
+        btns.push(h(getPrefix('button'), {
           style: {
             'margin-left': '10px'
           },
@@ -407,7 +407,7 @@ export default {
         }, this.resetText))
       }
 
-      return this.$createElement(getPrefix('form-item'), btns)
+      return h(getPrefix('form-item'), btns)
     },
     // 渲染 input
     renderInput(h, item) {
@@ -457,7 +457,7 @@ export default {
           ...(item.props || {})
         },
         children: item.options.map(option => {
-          return this.$createElement(getPrefix('option'), {
+          return h(getPrefix('option'), {
             props: {
               label: option.text,
               value: option.value,
@@ -495,7 +495,7 @@ export default {
         tagName: getPrefix('checkbox-group'),
         props: item.props || {},
         children: item.options.map(option => {
-          return this.$createElement(getPrefix('checkbox'), {
+          return h(getPrefix('checkbox'), {
             props: {
               border: item.border,
               label: option.value,
@@ -574,7 +574,7 @@ export default {
         tagName: getPrefix('radio-group'),
         props: item.props || {},
         children: item.options.map(option => {
-          return this.$createElement(getPrefix('radio'), {
+          return h(getPrefix('radio'), {
             props: {
               border: item.border,
               label: option.value,
@@ -667,8 +667,7 @@ export default {
         }
       }
 
-      return this.$createElement(tagName, {
-        ref: item.ref || `refs${Math.random().toString(36).substr(2, 10)}`,
+      return h(tagName, {
         props: currProps,
         attrs,
         style: {
