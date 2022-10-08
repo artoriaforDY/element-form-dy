@@ -153,8 +153,8 @@ export default {
 
 ## 更新日志
 
-### 1.9.15
-1. 表单项添加ref，可以使用$refs
+### 1.9.16
+1. 表单项添加ref，可以使用$refs，input返回当前form的refs
 
 ### 1.9.5
 1. title为空时不渲染title的标签
