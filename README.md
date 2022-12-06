@@ -96,6 +96,7 @@ export default {
 ## formList 参数
 | 参数 | 说明 | 类型 | 默认值 |
 | - | - | - | - |
+| ref | 设置组件的ref，可在onInput第四参数获取 | String | '' |
 | title | 显示的标签 | String | '' |
 | type | 不同的类型默认值不同，具体看下面 type 的种类 | String | '' |
 | key | 可以监听 submit 事件，返回的 form 里面的 key 就是你定义的 key | String | '' |
@@ -125,7 +126,7 @@ export default {
 | checkbox | false | |
 | checkbox-group | [] | |
 | radio | false | 没有意义，不建议使用 |
-| radio-group | [] | |
+| radio-group | '' | String,Number |
 | date | 当前时间，new Date() | |
 | datetime | 当前时间，new Date() | |
 | daterange | ['', ''] | |
