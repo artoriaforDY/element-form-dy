@@ -82,6 +82,7 @@ export default {
 | lib | 可选值（'iview', 'element'），如果指定为 element 那么组件会按照 element 来渲染 | String | 'iview' |
 | label-width | 标签的宽度 | Number | 100 |
 | content-width | 内容的宽度(支持 百分比 auto) | Number, String | 240 |
+| width | 组件的宽度(只支持数值及百分比、auto写法，不支持固定的xxx px) | Number, String | - |
 | options | iView 和 element-ui 原生 props ( :options="{size: 'small'}" ) | Object | {} |
 | submitText | 提交按钮文本 | String | '提交' |
 | resetText | 重置按钮文本 | String | '重置' |
