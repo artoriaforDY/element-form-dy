@@ -214,15 +214,20 @@ export default {
         for (let j = 0; j < grid && i + j < this.formList.length; j++) {
           let children = this.formList[i + j]
           if (!children) break
-          let childrenItem = this.getFormItem(h, children, this.getContent(h, children))
-          let childrenParts = h(getPrefix('col'), {
-            props: {
-              span: 24 / grid
-            }
-          }, [
-            childrenItem
-          ])
-          childrenList.push(childrenParts)
+          if (children.isShow && !children.hasRow) {
+            grid--
+          }
+          if (grid > 0) {
+            let childrenItem = this.getFormItem(h, children, this.getContent(h, children))
+            let childrenParts = h(getPrefix('col'), {
+              props: {
+                span: 24 / grid
+              }
+            }, [
+              childrenItem
+            ])
+            childrenList.push(childrenParts)
+          }
         }
         let row = this.getRow(h, childrenList)
         list.push(row)
@@ -370,18 +375,22 @@ export default {
     },
     // 渲染 title
     renderTitle(h, item) {
-      return <span slot="label">
-        {
-          item.required === true
-            ? <span style="color: font">*</span>
-            : ''
-        }
-        {
-          typeof item.renderTitle === 'function'
-            ? <span>{item.renderTitle(h, item, this.form)}</span>
-            : <span>{item.title}</span>
-        }
-      </span>
+      if(item.title){
+        return <span slot="label">
+          {
+            item.required === true
+              ? <span style="color: font">*</span>
+              : ''
+          }
+          {
+            typeof item.renderTitle === 'function'
+              ? <span>{item.renderTitle(h, item, this.form)}</span>
+              : <span>{item.title}</span>
+          }
+        </span>
+      } else {
+        return ''
+      }
     },
     // 渲染提交 按钮
     renderSubmit(h) {
@@ -635,6 +644,7 @@ export default {
     },
     // 生产 tag
     generateTag({h, item, tagName, props, children, on = {}, nativeOn = {}}) {
+      var _this = this;
       let currProps = {
         value: this.form[item.key],
         min: 0,
@@ -667,9 +677,10 @@ export default {
         }
       }
 
-      return h(tagName, {
+      let obj = {
         props: currProps,
         attrs,
+        key: item.key,
         style: {
           width
         },
@@ -677,8 +688,12 @@ export default {
           ...itemOn,
           input: (value) => {
             value = this.formatDateValue(value, item)
+            let refObj = {}
+            if(item.ref){
+              refObj[item.ref] = _this.$refs[item.ref]
+            }
             this.form[item.key] = value
-            this.emitInput(value, item)
+            this.emitInput(value, item, refObj)
           },
           ...on
         },
@@ -686,7 +701,11 @@ export default {
           ...itemNativeOn,
           ...nativeOn
         }
-      }, children)
+      }
+      if(item.hasOwnProperty('ref')){
+        obj.ref = item.ref
+      }
+      return h(tagName, obj, children)
     },
     // 格式化日期返回，避免 null 的出现
     formatDateValue(value, item) {
