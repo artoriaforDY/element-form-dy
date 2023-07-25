@@ -208,7 +208,7 @@ export default {
       let grid = ~~Math.abs(this.grid)
       if (grid < 1) grid = 1
 
-      let formList = this.formList.filter(children => (children.isShow !== false && children.hasRow !== false))
+      let formList = this.formList.filter(children => !(children.isShow === false && children.hasRow === false))
       for (let i = 0; i < formList.length; i += grid) {
         let childrenList = []
         // 获取当前分成几列 grid 为 number 时
@@ -234,7 +234,7 @@ export default {
     getFormListByArray(h) {
       let list = []
       let gridIndex = 0
-      let formList = this.formList.filter(children => (children.isShow !== false && children.hasRow !== false))
+      let formList = this.formList.filter(children => !(children.isShow === false && children.hasRow === false))
       for (let i = 0; i < formList.length;) {
         let childrenList = []
         let grid = this.grid[gridIndex]
@@ -262,7 +262,7 @@ export default {
     getFormListByGrid(h) {
       let list = []
       let gridIndex = 0
-      let formList = this.formList.filter(children => (children.isShow !== false && children.hasRow !== false))
+      let formList = this.formList.filter(children => !(children.isShow === false && children.hasRow === false))
       for (let i = 0; i < formList.length;) {
         let childrenList = []
         let grid = this.grid[gridIndex]
