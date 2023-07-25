@@ -208,26 +208,22 @@ export default {
       let grid = ~~Math.abs(this.grid)
       if (grid < 1) grid = 1
 
-      for (let i = 0; i < this.formList.length; i += grid) {
+      let formList = this.formList.filter(children => (children.isShow !== false && children.hasRow !== false))
+      for (let i = 0; i < formList.length; i += grid) {
         let childrenList = []
         // 获取当前分成几列 grid 为 number 时
-        for (let j = 0; j < grid && i + j < this.formList.length; j++) {
-          let children = this.formList[i + j]
+        for (let j = 0; j < grid && i + j < formList.length; j++) {
+          let children = formList[i + j]
           if (!children) break
-          if (children.isShow && !children.hasRow) {
-            grid--
-          }
-          if (grid > 0) {
-            let childrenItem = this.getFormItem(h, children, this.getContent(h, children))
-            let childrenParts = h(getPrefix('col'), {
-              props: {
-                span: 24 / grid
-              }
-            }, [
-              childrenItem
-            ])
-            childrenList.push(childrenParts)
-          }
+          let childrenItem = this.getFormItem(h, children, this.getContent(h, children))
+          let childrenParts = h(getPrefix('col'), {
+            props: {
+              span: 24 / grid
+            }
+          }, [
+            childrenItem
+          ])
+          childrenList.push(childrenParts)
         }
         let row = this.getRow(h, childrenList)
         list.push(row)
@@ -238,11 +234,12 @@ export default {
     getFormListByArray(h) {
       let list = []
       let gridIndex = 0
-      for (let i = 0; i < this.formList.length;) {
+      let formList = this.formList.filter(children => (children.isShow !== false && children.hasRow !== false))
+      for (let i = 0; i < formList.length;) {
         let childrenList = []
         let grid = this.grid[gridIndex]
         for (let j = 0; j < grid; j++) {
-          let children = this.formList[i + j]
+          let children = formList[i + j]
           if (!children) break
           let childrenItem = this.getFormItem(h, children, this.getContent(h, children))
           let childrenParts = h(getPrefix('col'), {
@@ -265,12 +262,13 @@ export default {
     getFormListByGrid(h) {
       let list = []
       let gridIndex = 0
-      for (let i = 0; i < this.formList.length;) {
+      let formList = this.formList.filter(children => (children.isShow !== false && children.hasRow !== false))
+      for (let i = 0; i < formList.length;) {
         let childrenList = []
         let grid = this.grid[gridIndex]
         if (!grid) grid = [1]
         for (let j = 0; j < grid.length; j++) {
-          let children = this.formList[i + j]
+          let children = formList[i + j]
           if (!children) break
           let childrenItem = this.getFormItem(h, children, this.getContent(h, children))
           let childrenParts = h(getPrefix('col'), {
