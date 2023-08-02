@@ -742,8 +742,12 @@ export default {
       this.$refs.form.resetFields()
     },
     // 清空验证
-    clear() {
-      this.$refs.form.clearValidate && this.$refs.form.clearValidate()
+    clear: function clear(props) {
+      if (props) {
+        this.$refs.form.clearValidate && this.$refs.form.clearValidate(props);
+      } else {
+        this.$refs.form.clearValidate && this.$refs.form.clearValidate();
+      }
     },
     // 根据 key 获取 value
     getFormBykey(key) {
