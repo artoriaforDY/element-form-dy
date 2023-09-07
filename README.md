@@ -99,6 +99,7 @@ export default {
 | - | - | - | - |
 | ref | 设置组件的ref，可在onInput第四参数获取 | String | '' |
 | title | 显示的标签 | String | '' |
+| width | 单独设置组件宽度（不包括title宽度），未设置时默认使用contentWidth宽度(只支持数值及百分比、auto写法，不支持固定的xxx px) | Number,String | '' |
 | type | 不同的类型默认值不同，具体看下面 type 的种类 | String | '' |
 | key | 可以监听 submit 事件，返回的 form 里面的 key 就是你定义的 key | String | '' |
 | defaultValue | item 的默认值 | - | - |
