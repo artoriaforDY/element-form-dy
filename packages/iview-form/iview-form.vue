@@ -691,7 +691,7 @@ export default {
               refObj[item.ref] = _this.$refs[item.ref]
             }
             this.form[item.key] = value
-            this.emitInput(value, item, refObj)
+            this.emitInput(value, item, refObj, _this.$refs)
           },
           ...on
         },
@@ -724,15 +724,15 @@ export default {
       return value
     },
     // 触发 item onInput 事件
-    emitInput(value, item) {
+    emitInput(value, item, refObj, allRef) {
       if (typeof item.onInput === 'function') {
-        item.onInput(value, item, this.form)
+        item.onInput(value, item, this.form, refObj, allRef)
       }
     },
     // 提交事件
     submit() {
       this.$refs.form.validate(valid => {
-        this.$emit('submit', this.getForm(), valid)
+        this.$emit('submit', this.getForm(), valid, this.$refs)
       })
     },
     // 清空 form 表单
