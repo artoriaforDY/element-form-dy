@@ -643,12 +643,18 @@ export default {
     // 生产 tag
     generateTag({h, item, tagName, props, children, on = {}, nativeOn = {}}) {
       var _this = this;
+      let disabled = true
+      if (typeof item.disabled == 'function') {
+        disabled = item.disabled()
+      } else {
+        disabled = item.disabled
+      }
       let currProps = {
         value: this.form[item.key],
         min: 0,
         max: 9999999,
         ...props,
-        disabled: this.disabled || item.disabled
+        disabled: this.disabled || disabled
       }
       let attrs = item.attrs || {}
       let width = null
