@@ -108,7 +108,7 @@ export default {
 | attrs | 组件库自带的参数,可以参考 iview 或者 element 组件库的文档 | Object | {} |
 | text | type 为 checkbox 或者 radio 时才有用，显示后面跟着的文字 | String | '' |
 | options | type 为 select、checkbox-group、radio-group、cascader 时才有用，由 {value: 0, text: '苹果'} 组成，数据项支持异步 | Array | [] |
-| onInput | 监听参数改变事件 | Function | (value, item, form) |
+| onInput | 监听参数改变事件 | Function | (value, item, form, currentRef, allRef) |
 | render | 自定义整行 | Function | (h, item, form) |
 | renderTitle | 自定义标签 | Function | (h, item, form) |
 | renderContent | 自定义内容主题 | Function | (h, item, form) |
