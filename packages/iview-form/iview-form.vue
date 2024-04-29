@@ -207,8 +207,16 @@ export default {
       // 过滤 grid
       let grid = ~~Math.abs(this.grid)
       if (grid < 1) grid = 1
+      let _this = this
 
-      let formList = this.formList.filter(children => !(children.isShow === false && children.hasRow === false))
+      let formList = this.formList.filter(children => {
+        let isShow = children.hasOwnProperty('isShow') ? children.isShow : true
+        let hasRow = children.hasOwnProperty('hasRow') ? children.hasRow : true
+        if (typeof children.isShow == 'function') {
+          isShow = children.isShow(_this.form, children)
+        }
+        return !(!isShow && !hasRow)
+      })
       for (let i = 0; i < formList.length; i += grid) {
         let childrenList = []
         // 获取当前分成几列 grid 为 number 时
@@ -234,7 +242,15 @@ export default {
     getFormListByArray(h) {
       let list = []
       let gridIndex = 0
-      let formList = this.formList.filter(children => !(children.isShow === false && children.hasRow === false))
+      let _this = this
+      let formList = this.formList.filter(children => {
+        let isShow = children.hasOwnProperty('isShow') ? children.isShow : true
+        let hasRow = children.hasOwnProperty('hasRow') ? children.hasRow : true
+        if (typeof children.isShow == 'function') {
+          isShow = children.isShow(_this.form, children)
+        }
+        return !(!isShow && !hasRow)
+      })
       for (let i = 0; i < formList.length;) {
         let childrenList = []
         let grid = this.grid[gridIndex]
@@ -262,7 +278,15 @@ export default {
     getFormListByGrid(h) {
       let list = []
       let gridIndex = 0
-      let formList = this.formList.filter(children => !(children.isShow === false && children.hasRow === false))
+      let _this = this
+      let formList = this.formList.filter(children => {
+        let isShow = children.hasOwnProperty('isShow') ? children.isShow : true
+        let hasRow = children.hasOwnProperty('hasRow') ? children.hasRow : true
+        if (typeof children.isShow == 'function') {
+          isShow = children.isShow(_this.form, children)
+        }
+        return !(!isShow && !hasRow)
+      })
       for (let i = 0; i < formList.length;) {
         let childrenList = []
         let grid = this.grid[gridIndex]
