@@ -104,6 +104,7 @@ export default {
 | key | 可以监听 submit 事件，返回的 form 里面的 key 就是你定义的 key | String | '' |
 | rule | 单个表单验证 | Array/Object | - |
 | defaultValue | item 的默认值, 参见type种类表 | - | - |
+| hasRow | isShow为false时是否保留空行 | Boolean,Function(form, item) | true |
 | isShow | isShow 为 false 会不显示这个元素，但会留空行，如不想留空行可再添加hasRow:false | Boolean,Function(form, item) | true |
 | props | 组件库自带的参数,可以参考 iview 或者 element 组件库的文档 | Object | {} |
 | attrs | 组件库自带的参数,可以参考 iview 或者 element 组件库的文档 | Object | {} |

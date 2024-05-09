@@ -210,10 +210,17 @@ export default {
       let _this = this
 
       let formList = this.formList.filter(children => {
-        let isShow = children.hasOwnProperty('isShow') ? children.isShow : true
-        let hasRow = children.hasOwnProperty('hasRow') ? children.hasRow : true
+        let isShow = true
+        let hasRow = true
         if (typeof children.isShow == 'function') {
           isShow = children.isShow(_this.form, children)
+        } else {
+          isShow = !!children.isShow
+        }
+        if (typeof children.hasRow == 'function') {
+          hasRow = children.hasRow(_this.form, children)
+        } else {
+          hasRow = !!children.hasRow
         }
         return !(!isShow && !hasRow)
       })
@@ -244,10 +251,17 @@ export default {
       let gridIndex = 0
       let _this = this
       let formList = this.formList.filter(children => {
-        let isShow = children.hasOwnProperty('isShow') ? children.isShow : true
-        let hasRow = children.hasOwnProperty('hasRow') ? children.hasRow : true
+        let isShow = true
+        let hasRow = true
         if (typeof children.isShow == 'function') {
           isShow = children.isShow(_this.form, children)
+        } else {
+          isShow = !!children.isShow
+        }
+        if (typeof children.hasRow == 'function') {
+          hasRow = children.hasRow(_this.form, children)
+        } else {
+          hasRow = !!children.hasRow
         }
         return !(!isShow && !hasRow)
       })
@@ -280,10 +294,17 @@ export default {
       let gridIndex = 0
       let _this = this
       let formList = this.formList.filter(children => {
-        let isShow = children.hasOwnProperty('isShow') ? children.isShow : true
-        let hasRow = children.hasOwnProperty('hasRow') ? children.hasRow : true
+        let isShow = true
+        let hasRow = true
         if (typeof children.isShow == 'function') {
           isShow = children.isShow(_this.form, children)
+        } else {
+          isShow = !!children.isShow
+        }
+        if (typeof children.hasRow == 'function') {
+          hasRow = children.hasRow(_this.form, children)
+        } else {
+          hasRow = !!children.hasRow
         }
         return !(!isShow && !hasRow)
       })
