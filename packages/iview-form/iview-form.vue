@@ -215,12 +215,12 @@ export default {
         if (typeof children.isShow == 'function') {
           isShow = children.isShow(_this.form, children)
         } else {
-          isShow = !!children.isShow
+          isShow = children.hasOwnProperty('isShow') ? !!children.isShow : true
         }
         if (typeof children.hasRow == 'function') {
           hasRow = children.hasRow(_this.form, children)
         } else {
-          hasRow = !!children.hasRow
+          hasRow = children.hasOwnProperty('hasRow') ? !!children.hasRow : true
         }
         return !(!isShow && !hasRow)
       })
@@ -256,12 +256,12 @@ export default {
         if (typeof children.isShow == 'function') {
           isShow = children.isShow(_this.form, children)
         } else {
-          isShow = !!children.isShow
+          isShow = children.hasOwnProperty('isShow') ? !!children.isShow : true
         }
         if (typeof children.hasRow == 'function') {
           hasRow = children.hasRow(_this.form, children)
         } else {
-          hasRow = !!children.hasRow
+          hasRow = children.hasOwnProperty('hasRow') ? !!children.hasRow : true
         }
         return !(!isShow && !hasRow)
       })
@@ -299,12 +299,12 @@ export default {
         if (typeof children.isShow == 'function') {
           isShow = children.isShow(_this.form, children)
         } else {
-          isShow = !!children.isShow
+          isShow = children.hasOwnProperty('isShow') ? !!children.isShow : true
         }
         if (typeof children.hasRow == 'function') {
           hasRow = children.hasRow(_this.form, children)
         } else {
-          hasRow = !!children.hasRow
+          hasRow = children.hasOwnProperty('hasRow') ? !!children.hasRow : true
         }
         return !(!isShow && !hasRow)
       })
