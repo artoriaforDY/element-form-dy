@@ -2,8 +2,6 @@
 
 > 让 element-ui 的 form 使用起来更加简单。
 
-## 例子
-[demo][1]
 
 ## 安装
 
@@ -16,22 +14,22 @@ $ npm install element-form-dy
 ### script
 
 ```html
-<script src="//cdn.jsdelivr.net/npm/iview-form@1.0.12/lib/iview-form.js"></script>
+<script src="//cdn.jsdelivr.net/npm/element-form-dy@1.9.1817/lib/element-form-dy.js"></script>
 ```
 
 ## 快速开始
 
 ``` html
 <template>
-  <iViewForm @submit="onSubmit" :formList="formList"></iViewForm>
+  <elementFormDy @submit="onSubmit" :formList="formList"></elementFormDy>
 </template>
 
 <script>
-import iViewForm from 'xt-element-form'
+import elementFormDy from 'element-form-dy'
 
 export default {
   components: {
-    iViewForm
+    elementFormDy
   },
   data() {
     return {
@@ -56,18 +54,18 @@ export default {
 标签大小写随你心情
 
 ``` html
-<iview-form @submit="onSubmit" :formList="formList"></iview-form>
+<elementFormDy @submit="onSubmit" :formList="formList"></elementFormDy>
 ```
 
 使用 element-ui 组件库
 
 ``` html
-<iview-form lib="element" @submit="onSubmit" :formList="formList"></iview-form>
+<elementFormDy lib="element" @submit="onSubmit" :formList="formList"></elementFormDy>
 ```
 
 ## 注意
     如果你是 script 标签引入的，那么所有的参数要用小写，并且单词用 - 链接。
-    iViewForm => iview-form
+    elementFormDy => element-form-dy
     formList => form-list
 
 ## iview-form 参数
@@ -278,6 +276,3 @@ export default {
 
 ## LICENSE
 MIT
-
-
-[1]: https://viewweiwu.github.io/iview-form/examples/dist/

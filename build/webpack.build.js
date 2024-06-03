@@ -3,12 +3,12 @@ const webpack = require('webpack')
 const config = require('./webpack.base.conf')
 // 修改入口文件
 config.entry = {
-  'iview-form': './src/index.js'
+  'element-form-dy': './src/index.js'
 }
 // 修改输出目录
 config.output = {
   filename: './lib/[name].js',
-  library: 'iview-form',
+  library: 'element-form-dy',
   libraryTarget: 'umd'
 }
 // 配置externals选项

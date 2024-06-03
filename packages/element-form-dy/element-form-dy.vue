@@ -25,7 +25,7 @@ const getPrefix = (tag) => {
 }
 
 export default {
-  name: 'iview-form',
+  name: 'element-form-dy',
   props: {
     // 是否启用 grid 布局
     grid: {

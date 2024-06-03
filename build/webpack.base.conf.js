@@ -30,7 +30,7 @@ module.exports = {
   context: path.resolve(__dirname, '../'),
   entry: {
     'vendor': ['vue'],
-    'iview-form': './examples/src/index.js'
+    'element-form-dy': './examples/src/index.js'
   },
   output: {
     path: path.join(__dirname, '../examples/dist'),
@@ -129,7 +129,7 @@ module.exports = {
     new webpack.NoEmitOnErrorsPlugin(),
     // 页面主入口
     new HtmlWebpackPlugin({
-      chunks: ['manifest', 'vendor', 'iview-form'],
+      chunks: ['manifest', 'vendor', 'element-form-dy'],
       template: 'examples/src/index.tpl',
       filename: 'index.html',
       inject: true
