@@ -1,6 +1,6 @@
 {
   "name": "element-form-dy",
-  "version": "1.9.1818",
+  "version": "1.9.1819",
   "description": "Configuration element form",
   "author": "sunnyhills <634778445@qq.com>",
   "private": false,
@@ -33,7 +33,7 @@
     "vue": "^2.5.2",
     "vue-highlight.js": "^2.2.0"
   },
-  "main": "lib/iview-form.js",
+  "main": "lib/element-form-dy.js",
   "files": [
     "lib",
     "src",
