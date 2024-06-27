@@ -156,6 +156,8 @@ export default {
 
 ## 更新日志
 
+### 1.9.1820
+1. disabled 加入form传值
 ### 1.9.1814
 1. 单个组件中返回所有ref的值
 2. 单个组件添加function判断disabled

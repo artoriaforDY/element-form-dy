@@ -690,7 +690,7 @@ export default {
       var _this = this;
       let disabled = true
       if (typeof item.disabled == 'function') {
-        disabled = item.disabled()
+        disabled = item.disabled(_this.form, children)
       } else {
         disabled = item.disabled
       }
