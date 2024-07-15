@@ -1,24 +1,24 @@
 <script>
 const getPrefix = (tag) => {
   let elementMap = {
-    'form': 'el-form',
+    form: 'el-form',
     'form-item': 'el-form-item',
-    'input': 'el-input',
-    'select': 'el-select',
-    'option': 'el-option',
-    'checkbox': 'el-checkbox',
+    input: 'el-input',
+    select: 'el-select',
+    option: 'el-option',
+    checkbox: 'el-checkbox',
     'checkbox-group': 'el-checkbox-group',
     'date-picker': 'el-date-picker',
     'time-picker': 'el-time-picker',
-    'radio': 'el-radio',
+    radio: 'el-radio',
     'radio-group': 'el-radio-group',
-    'switch': 'el-switch',
-    'slider': 'el-slider',
-    'button': 'el-button',
-    'row': 'el-row',
-    'col': 'el-col',
+    switch: 'el-switch',
+    slider: 'el-slider',
+    button: 'el-button',
+    row: 'el-row',
+    col: 'el-col',
     'input-number': 'el-input-number',
-    'cascader': 'el-cascader'
+    cascader: 'el-cascader',
   }
 
   return elementMap[tag]
@@ -29,113 +29,117 @@ export default {
   props: {
     // 是否启用 grid 布局
     grid: {
-      type: [Array, Number]
+      type: [Array, Number],
     },
     // grid 间距
     gutter: {
-      type: Number
+      type: Number,
     },
     // formItem 项
     formList: {
       type: Array,
-      default: () => []
+      default: () => [],
     },
     // 是否显示整个控制按钮
     notCtrl: {
       type: Boolean,
-      default: false
+      default: false,
     },
     // 是否开启 input 标签默认
     enterSubmit: {
       type: Boolean,
-      default: false
+      default: false,
     },
     // 默认标签宽度
     'label-width': {
       type: Number,
-      default: 100
+      default: 100,
     },
     // 默认内容宽度
     'content-width': {
       type: [Number, String],
-      default: 240
+      default: 240,
     },
     // submit 按钮文本
     submitText: {
       type: String,
-      default: '提交'
+      default: '提交',
     },
     // 重置按钮文本
     resetText: {
       type: String,
-      default: '重置'
+      default: '重置',
     },
     // 是否拥有 提交 按钮
     hasSubmitBtn: {
       type: Boolean,
-      default: true
+      default: true,
     },
     // 是否拥有 重置 按钮
     hasResetBtn: {
       type: Boolean,
-      default: true
+      default: true,
     },
     // 原生 form 标签上的 props
     options: {
-      type: Object
+      type: Object,
     },
     // 开启全局 clearable
     clearable: {
       type: Boolean,
-      default: true
+      default: true,
     },
     // 文本框默认字符个数
     maxlength: {
       type: [Number, String],
-      default: 20
+      default: 20,
     },
     // 多行文本框默认字符个数
     textareaMaxlength: {
       type: Number,
-      default: 256
+      default: 256,
     },
     // 是否全局 disabled
     disabled: {
       type: Boolean,
-      default: false
-    }
+      default: false,
+    },
   },
   data() {
     return {
-      form: this.initForm()
+      form: this.initForm(),
     }
   },
   render(h) {
-    return h(getPrefix('form'), {
-      props: {
-        model: this.form,
-        rules: this.rules,
-        'label-width': this['labelWidth'] + 'px',
-        ...this.options
+    return h(
+      getPrefix('form'),
+      {
+        props: {
+          model: this.form,
+          rules: this.rules,
+          'label-width': this['labelWidth'] + 'px',
+          ...this.options,
+        },
+        ref: 'form',
+        nativeOn: {
+          submit(e) {
+            e.preventDefault()
+            e.stopPropagation()
+          },
+        },
       },
-      ref: 'form',
-      nativeOn: {
-        submit(e) {
-          e.preventDefault()
-          e.stopPropagation()
-        }
-      }
-    }, [
-      this.$slots.prepend,
-      this.renderFormList(h),
-      !this.notCtrl && this.renderSubmit(h),
-      this.$slots.default
-    ])
+      [
+        this.$slots.prepend,
+        this.renderFormList(h),
+        !this.notCtrl && this.renderSubmit(h),
+        this.$slots.default,
+      ]
+    )
   },
   computed: {
     rules() {
       let rules = {}
-      this.formList.forEach(item => {
+      this.formList.forEach((item) => {
         if (item.rule !== undefined) {
           rules[item.key] = item.rule
         }
@@ -144,39 +148,40 @@ export default {
     },
     gridNum() {
       return this.grid
-    }
+    },
   },
   methods: {
     // 默认值
     initForm() {
       let form = {}
       let map = {
-        'input': '',
-        'select': null,
-        'checkbox': false,
+        input: '',
+        select: null,
+        checkbox: false,
         'checkbox-group': [],
-        'date': new Date(),
-        'datetime': new Date(),
-        'daterange': [],
-        'datetimerange': [],
-        'time': '',
-        'radio': false,
+        date: new Date(),
+        datetime: new Date(),
+        daterange: [],
+        datetimerange: [],
+        time: '',
+        radio: false,
         'radio-group': '',
-        'slider': 0,
-        'switch': false,
+        slider: 0,
+        switch: false,
         'input-number': 0,
-        'cascader': []
+        cascader: [],
       }
-      this.formList.forEach(item => {
+      this.formList.forEach((item) => {
         let defaultValue = ''
-        defaultValue = item.defaultValue !== undefined ? item.defaultValue : map[item.type]
+        defaultValue =
+          item.defaultValue !== undefined ? item.defaultValue : map[item.type]
         if (item.key) {
           form[item.key] = defaultValue
         }
       })
       return form
     },
-    getHypeScript () {
+    getHypeScript() {
       return this.$parent.$createElement
     },
     renderFormList(h) {
@@ -186,7 +191,7 @@ export default {
       if (typeof grid === 'number') {
         list = this.getFormListByNumber(h)
       } else if (Array.isArray(grid)) {
-        if (grid.every(item => !Array.isArray(item))) {
+        if (grid.every((item) => !Array.isArray(item))) {
           list = this.getFormListByArray(h)
         } else {
           list = this.getFormListByGrid(h)
@@ -197,7 +202,7 @@ export default {
       return list
     },
     getFormList(h) {
-      return this.formList.map(item => {
+      return this.formList.map((item) => {
         return this.getFormItem(h, item, this.getContent(h, item))
       })
     },
@@ -209,7 +214,7 @@ export default {
       if (grid < 1) grid = 1
       let _this = this
 
-      let formList = this.formList.filter(children => {
+      let formList = this.formList.filter((children) => {
         let isShow = true
         let hasRow = true
         if (typeof children.isShow == 'function') {
@@ -230,14 +235,20 @@ export default {
         for (let j = 0; j < grid && i + j < formList.length; j++) {
           let children = formList[i + j]
           if (!children) break
-          let childrenItem = this.getFormItem(h, children, this.getContent(h, children))
-          let childrenParts = h(getPrefix('col'), {
-            props: {
-              span: 24 / grid
-            }
-          }, [
-            childrenItem
-          ])
+          let childrenItem = this.getFormItem(
+            h,
+            children,
+            this.getContent(h, children)
+          )
+          let childrenParts = h(
+            getPrefix('col'),
+            {
+              props: {
+                span: 24 / grid,
+              },
+            },
+            [childrenItem]
+          )
           childrenList.push(childrenParts)
         }
         let row = this.getRow(h, childrenList)
@@ -250,7 +261,7 @@ export default {
       let list = []
       let gridIndex = 0
       let _this = this
-      let formList = this.formList.filter(children => {
+      let formList = this.formList.filter((children) => {
         let isShow = true
         let hasRow = true
         if (typeof children.isShow == 'function') {
@@ -265,20 +276,26 @@ export default {
         }
         return !(!isShow && !hasRow)
       })
-      for (let i = 0; i < formList.length;) {
+      for (let i = 0; i < formList.length; ) {
         let childrenList = []
         let grid = this.grid[gridIndex]
         for (let j = 0; j < grid; j++) {
           let children = formList[i + j]
           if (!children) break
-          let childrenItem = this.getFormItem(h, children, this.getContent(h, children))
-          let childrenParts = h(getPrefix('col'), {
-            props: {
-              span: 24 / grid
-            }
-          }, [
-            childrenItem
-          ])
+          let childrenItem = this.getFormItem(
+            h,
+            children,
+            this.getContent(h, children)
+          )
+          let childrenParts = h(
+            getPrefix('col'),
+            {
+              props: {
+                span: 24 / grid,
+              },
+            },
+            [childrenItem]
+          )
           childrenList.push(childrenParts)
         }
         let row = this.getRow(h, childrenList)
@@ -293,7 +310,7 @@ export default {
       let list = []
       let gridIndex = 0
       let _this = this
-      let formList = this.formList.filter(children => {
+      let formList = this.formList.filter((children) => {
         let isShow = true
         let hasRow = true
         if (typeof children.isShow == 'function') {
@@ -308,21 +325,27 @@ export default {
         }
         return !(!isShow && !hasRow)
       })
-      for (let i = 0; i < formList.length;) {
+      for (let i = 0; i < formList.length; ) {
         let childrenList = []
         let grid = this.grid[gridIndex]
         if (!grid) grid = [1]
         for (let j = 0; j < grid.length; j++) {
           let children = formList[i + j]
           if (!children) break
-          let childrenItem = this.getFormItem(h, children, this.getContent(h, children))
-          let childrenParts = h(getPrefix('col'), {
-            props: {
-              span: grid[j]
-            }
-          }, [
-            childrenItem
-          ])
+          let childrenItem = this.getFormItem(
+            h,
+            children,
+            this.getContent(h, children)
+          )
+          let childrenParts = h(
+            getPrefix('col'),
+            {
+              props: {
+                span: grid[j],
+              },
+            },
+            [childrenItem]
+          )
           childrenList.push(childrenParts)
         }
         let row = this.getRow(h, childrenList)
@@ -332,12 +355,16 @@ export default {
       }
       return list
     },
-    getRow (h, childrenList) {
-      return h(getPrefix('row'), {
-        props: {
-          gutter: this.gutter
-        }
-      }, childrenList)
+    getRow(h, childrenList) {
+      return h(
+        getPrefix('row'),
+        {
+          props: {
+            gutter: this.gutter,
+          },
+        },
+        childrenList
+      )
     },
     getContent(h, item) {
       let content
@@ -407,30 +434,29 @@ export default {
       } else {
         let settings = {
           props: {
-            prop: item.key
-          }
+            prop: item.key,
+          },
         }
-        return h(getPrefix('form-item'), Object.assign(settings, item.settings), [
-          this.renderTitle(h, item, this.form),
-          content
-        ])
+        return h(
+          getPrefix('form-item'),
+          Object.assign(settings, item.settings),
+          [this.renderTitle(h, item, this.form), content]
+        )
       }
     },
     // 渲染 title
     renderTitle(h, item) {
-      if(item.title){
-        return <span slot="label">
-          {
-            item.required === true
-              ? <span style="color: font">*</span>
-              : ''
-          }
-          {
-            typeof item.renderTitle === 'function'
-              ? <span>{item.renderTitle(h, item, this.form)}</span>
-              : <span>{item.title}</span>
-          }
-        </span>
+      if (item.title) {
+        return (
+          <span slot="label">
+            {item.required === true ? <span style="color: font">*</span> : ''}
+            {typeof item.renderTitle === 'function' ? (
+              <span>{item.renderTitle(h, item, this.form)}</span>
+            ) : (
+              <span>{item.title}</span>
+            )}
+          </span>
+        )
       } else {
         return ''
       }
@@ -439,24 +465,36 @@ export default {
     renderSubmit(h) {
       let btns = []
       if (this.hasSubmitBtn) {
-        btns.push(h(getPrefix('button'), {
-          props: {
-            type: 'primary'
-          },
-          on: {
-            click: this.submit
-          }
-        }, this.submitText))
+        btns.push(
+          h(
+            getPrefix('button'),
+            {
+              props: {
+                type: 'primary',
+              },
+              on: {
+                click: this.submit,
+              },
+            },
+            this.submitText
+          )
+        )
       }
       if (this.hasResetBtn) {
-        btns.push(h(getPrefix('button'), {
-          style: {
-            'margin-left': '10px'
-          },
-          on: {
-            click: this.reset
-          }
-        }, this.resetText))
+        btns.push(
+          h(
+            getPrefix('button'),
+            {
+              style: {
+                'margin-left': '10px',
+              },
+              on: {
+                click: this.reset,
+              },
+            },
+            this.resetText
+          )
+        )
       }
 
       return h(getPrefix('form-item'), btns)
@@ -486,15 +524,19 @@ export default {
         tagName: getPrefix('input'),
         props: {
           clearable: this.clearable,
-          ...props
+          ...props,
         },
         nativeOn: {
           keydown: (e) => {
-            if (e.keyCode === 13 && this.enterSubmit && props.type !== 'textarea') {
+            if (
+              e.keyCode === 13 &&
+              this.enterSubmit &&
+              props.type !== 'textarea'
+            ) {
               this.submit()
             }
-          }
-        }
+          },
+        },
       }
       return this.generateTag(tag)
     },
@@ -506,21 +548,25 @@ export default {
         tagName: getPrefix('select'),
         props: {
           clearable: this.clearable,
-          ...(item.props || {})
+          ...(item.props || {}),
         },
-        children: item.options.map(option => {
-          return h(getPrefix('option'), {
-            props: {
-              label: option.text,
-              value: option.value,
-              disabled: option.disabled
-            }
-          }, [
-            typeof item.renderOption === 'function'
-              ? item.renderOption(h, option, item)
-              : item.text
-          ])
-        })
+        children: item.options.map((option) => {
+          return h(
+            getPrefix('option'),
+            {
+              props: {
+                label: option.text,
+                value: option.value,
+                disabled: option.disabled,
+              },
+            },
+            [
+              typeof item.renderOption === 'function'
+                ? item.renderOption(h, option, item)
+                : item.text,
+            ]
+          )
+        }),
       }
       return this.generateTag(tag)
     },
@@ -535,7 +581,7 @@ export default {
         item,
         tagName: getPrefix('checkbox'),
         props,
-        children: item.text
+        children: item.text,
       }
       return this.generateTag(tag)
     },
@@ -546,15 +592,19 @@ export default {
         item,
         tagName: getPrefix('checkbox-group'),
         props: item.props || {},
-        children: item.options.map(option => {
-          return h(getPrefix('checkbox'), {
-            props: {
-              border: item.border,
-              label: option.value,
-              disabled: option.disabled
-            }
-          }, option.text)
-        })
+        children: item.options.map((option) => {
+          return h(
+            getPrefix('checkbox'),
+            {
+              props: {
+                border: item.border,
+                label: option.value,
+                disabled: option.disabled,
+              },
+            },
+            option.text
+          )
+        }),
       }
       return this.generateTag(tag)
     },
@@ -567,8 +617,8 @@ export default {
         props: {
           clearable: this.clearable,
           type: item.type,
-          ...(item.props || {})
-        }
+          ...(item.props || {}),
+        },
       }
       return this.generateTag(tag)
     },
@@ -585,8 +635,8 @@ export default {
         props: {
           clearable: this.clearable,
           type: item.type,
-          ...(item.props || {})
-        }
+          ...(item.props || {}),
+        },
       }
       return this.generateTag(tag)
     },
@@ -598,8 +648,8 @@ export default {
         props: {
           clearable: this.clearable,
           type: item.type,
-          ...(item.props || {})
-        }
+          ...(item.props || {}),
+        },
       }
       return this.generateTag(tag)
     },
@@ -614,7 +664,7 @@ export default {
         item,
         tagName: getPrefix('radio'),
         props,
-        children: item.text
+        children: item.text,
       }
       return this.generateTag(tag)
     },
@@ -625,15 +675,19 @@ export default {
         item,
         tagName: getPrefix('radio-group'),
         props: item.props || {},
-        children: item.options.map(option => {
-          return h(getPrefix('radio'), {
-            props: {
-              border: item.border,
-              label: option.value,
-              disabled: option.disabled
-            }
-          }, option.text)
-        })
+        children: item.options.map((option) => {
+          return h(
+            getPrefix('radio'),
+            {
+              props: {
+                border: item.border,
+                label: option.value,
+                disabled: option.disabled,
+              },
+            },
+            option.text
+          )
+        }),
       }
       return this.generateTag(tag)
     },
@@ -643,7 +697,7 @@ export default {
         h,
         item,
         tagName: getPrefix('switch'),
-        props: item.props || {}
+        props: item.props || {},
       }
       return this.generateTag(tag)
     },
@@ -653,7 +707,7 @@ export default {
         h,
         item,
         tagName: getPrefix('slider'),
-        props: item.props || {}
+        props: item.props || {},
       }
       return this.generateTag(tag)
     },
@@ -663,7 +717,7 @@ export default {
         h,
         item,
         tagName: getPrefix('input-number'),
-        props: item.props || {}
+        props: item.props || {},
       }
       return this.generateTag(tag)
     },
@@ -673,7 +727,7 @@ export default {
       let tag = {
         h,
         item,
-        tagName: getPrefix('cascader')
+        tagName: getPrefix('cascader'),
       }
       props.options = this.getCascaderOptions(item.options)
       tag.props = props
@@ -686,8 +740,8 @@ export default {
       return JSON.parse(list)
     },
     // 生产 tag
-    generateTag({h, item, tagName, props, children, on = {}, nativeOn = {}}) {
-      var _this = this;
+    generateTag({ h, item, tagName, props, children, on = {}, nativeOn = {} }) {
+      var _this = this
       let disabled = true
       if (typeof item.disabled == 'function') {
         disabled = item.disabled(_this.form, children)
@@ -699,7 +753,7 @@ export default {
         min: 0,
         max: 9999999,
         ...props,
-        disabled: this.disabled || disabled
+        disabled: this.disabled || disabled,
       }
       let attrs = item.attrs || {}
       let width = null
@@ -709,12 +763,12 @@ export default {
 
       // 忽略这些标签的宽度设置
       let ignoreMap = {
-        'switch': true,
-        'checkbox': true,
+        switch: true,
+        checkbox: true,
         'checkbox-group': true,
-        'radio': true,
+        radio: true,
         'radio-group': true,
-        'input-number': true
+        'input-number': true,
       }
 
       if (!ignoreMap[item.type]) {
@@ -731,27 +785,27 @@ export default {
         attrs,
         key: item.key,
         style: {
-          width
+          width,
         },
         on: {
           ...itemOn,
           input: (value) => {
             value = this.formatDateValue(value, item)
             let refObj = {}
-            if(item.ref){
+            if (item.ref) {
               refObj[item.ref] = _this.$refs[item.ref]
             }
             this.form[item.key] = value
             this.emitInput(value, item, refObj, _this.$refs)
           },
-          ...on
+          ...on,
         },
         nativeOn: {
           ...itemNativeOn,
-          ...nativeOn
-        }
+          ...nativeOn,
+        },
       }
-      if(item.hasOwnProperty('ref')){
+      if (item.hasOwnProperty('ref')) {
         obj.ref = item.ref
       }
       return h(tagName, obj, children)
@@ -782,7 +836,7 @@ export default {
     },
     // 提交事件
     submit() {
-      this.$refs.form.validate(valid => {
+      this.$refs.form.validate((valid) => {
         this.$emit('submit', this.getForm(), valid, this.$refs)
       })
     },
@@ -795,9 +849,9 @@ export default {
     // 清空验证
     clear: function clear(props) {
       if (props) {
-        this.$refs.form.clearValidate && this.$refs.form.clearValidate(props);
+        this.$refs.form.clearValidate && this.$refs.form.clearValidate(props)
       } else {
-        this.$refs.form.clearValidate && this.$refs.form.clearValidate();
+        this.$refs.form.clearValidate && this.$refs.form.clearValidate()
       }
     },
     // 根据 key 获取 value
@@ -807,7 +861,7 @@ export default {
     // 获取整个 form
     getForm() {
       return {
-        ...this.form
+        ...this.form,
       }
     },
     // 设值
@@ -816,9 +870,9 @@ export default {
         this.form[key] = form[key]
       }
     },
-    validateField (props, callback) {
+    validateField(props, callback) {
       this.$refs.form.validateField(props, callback)
-    }
-  }
+    },
+  },
 }
 </script>
