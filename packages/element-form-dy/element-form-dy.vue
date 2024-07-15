@@ -1,4 +1,7 @@
 <script>
+import { $on, $off, $once, $emit } from '../utils/gogocodeTransfer'
+import { plantRenderPara } from '../utils/gogocodeTransfer'
+import * as Vue from 'vue'
 const getPrefix = (tag) => {
   let elementMap = {
     form: 'el-form',
@@ -110,10 +113,10 @@ export default {
       form: this.initForm(),
     }
   },
-  render(h) {
-    return h(
+  render() {
+    return Vue.h(
       getPrefix('form'),
-      {
+      plantRenderPara({
         props: {
           model: this.form,
           rules: this.rules,
@@ -127,12 +130,12 @@ export default {
             e.stopPropagation()
           },
         },
-      },
+      }),
       [
-        this.$slots.prepend,
-        this.renderFormList(h),
-        !this.notCtrl && this.renderSubmit(h),
-        this.$slots.default,
+        this.$slots.prepend && this.$slots.prepend(),
+        this.renderFormList(Vue.h),
+        !this.notCtrl && this.renderSubmit(Vue.h),
+        this.$slots.default && this.$slots.default(),
       ]
     )
   },
@@ -837,7 +840,7 @@ export default {
     // 提交事件
     submit() {
       this.$refs.form.validate((valid) => {
-        this.$emit('submit', this.getForm(), valid, this.$refs)
+        $emit(this, 'submit', this.getForm(), valid, this.$refs)
       })
     },
     // 清空 form 表单
@@ -874,5 +877,6 @@ export default {
       this.$refs.form.validateField(props, callback)
     },
   },
+  emits: ['submit', 'update:value'],
 }
 </script>

@@ -1,7 +1,7 @@
 import elementFormDy from './element-form-dy'
 
 const install = (Vue) => {
-  Vue.component(elementFormDy.name, elementFormDy)
+  window.$vueApp.component(elementFormDy.name, elementFormDy)
 }
 
 if (typeof window !== 'undefined' && window.Vue) {
