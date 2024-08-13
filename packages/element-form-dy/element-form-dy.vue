@@ -171,7 +171,13 @@ export default {
         let defaultValue = ''
         defaultValue = item.defaultValue !== undefined ? item.defaultValue : map[item.type]
         if (item.key) {
-          form[item.key] = defaultValue
+          let disabled = true
+          if (typeof item.disabled == 'function') {
+            disabled = item.disabled(this.form, item)
+          } else {
+            disabled = item.disabled
+          }
+          form[item.key] = isExclude && disabled ? form[item.key] : defaultValue
         }
       })
       return form

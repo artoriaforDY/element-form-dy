@@ -115,12 +115,6 @@ exports.cdnLoader = (prod = false) => {
         var: 'ELEMENT',
         style: 'lib/theme-chalk/index.css',
         path: 'lib/index.js'
-      },
-      {
-        name: 'iview',
-        var: 'iview',
-        path: 'dist/iview.js',
-        style: 'dist/styles/iview.css',
       }
     ],
     prod,

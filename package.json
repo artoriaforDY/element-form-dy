@@ -1,6 +1,6 @@
 {
   "name": "element-form-dy",
-  "version": "1.9.1820",
+  "version": "1.9.1821",
   "description": "Configuration element form",
   "author": "sunnyhills <634778445@qq.com>",
   "private": false,
@@ -15,7 +15,6 @@
     "build:full": "webpack --progress --hide-modules --config build/webpack.build.js && rimraf examples/dist && cross-env NODE_ENV=production webpack --progress --hide-modules --config build/webpack.build.min.js"
   },
   "keywords": [
-    "iview",
     "element-ui",
     "vue",
     "vue.js",
@@ -29,7 +28,6 @@
   "dependencies": {
     "element-ui": "^2.3.7",
     "highlight.js": "^9.12.0",
-    "iview": "^2.14.3",
     "vue": "^2.5.2",
     "vue-highlight.js": "^2.2.0"
   },

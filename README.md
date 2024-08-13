@@ -68,7 +68,7 @@ export default {
     elementFormDy => element-form-dy
     formList => form-list
 
-## iview-form 参数
+## element-form-dy 参数
 
 | 参数 | 说明 | 类型 | 默认值 |
 | - | - | - | - |
@@ -113,9 +113,9 @@ export default {
 | renderTitle | 自定义标签 | Function | (h, item, form) |
 | renderContent | 自定义内容主题 | Function | (h, item, form) |
 | renderOption | type 为 select 时才有用，可以自定义 select 的 option | Function | (h, option, item) |
-| disabled | 禁用表单元素，优先级比标签上的低 | Boolean | false |
+| disabled | 禁用表单元素，优先级比标签上的低 | Boolean,Function(form, item) | false |
 | settings | formItem 的标签属性，比如 style，class | Object | {} |
-| border | 当组件库为 element 时，type：radio-group checkbox checkbox-group, 可以让选项有 border | Boolean | false |
+| border | 当组件库为 element 时，type：radio-group checkbox checkbox-group, 可以让选项有 bogirder | Boolean | false |
 | on | 当前 content 的 on 配置项, 如果要监听 input 事件 请使用 onInput | Object | {} |
 | nativeOn | 当前 content 的 nativeOn 配置项 | Object | {} |
 
@@ -156,11 +156,13 @@ export default {
 
 ## 更新日志
 
+### 1.9.1821
+1. reset重置时可选择传true来过滤禁用的项
 ### 1.9.1820
 1. disabled 加入form传值
 ### 1.9.1814
 1. 单个组件中返回所有ref的值
-2. 单个组件添加function判断disabled
+2. 单个组件添加function类型，简单的判断disabled的值
 ### 1.9.1810
 1. 修改清除验证方法，可单项清除
 ### 1.9.18
