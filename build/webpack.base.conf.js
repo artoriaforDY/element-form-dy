@@ -46,8 +46,7 @@ module.exports = {
     }
   },
   externals: {
-    'element-ui/lib/theme-chalk/index.css': 'null',
-    'iview/dist/styles/iview.css': 'null'
+    'element-ui/lib/theme-chalk/index.css': 'null'
   },
   module: {
     rules: [

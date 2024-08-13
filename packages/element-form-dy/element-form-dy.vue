@@ -155,7 +155,7 @@ export default {
   },
   methods: {
     // 默认值
-    initForm() {
+    initForm(isExclude) {
       let form = {}
       let map = {
         input: '',
@@ -179,7 +179,13 @@ export default {
         defaultValue =
           item.defaultValue !== undefined ? item.defaultValue : map[item.type]
         if (item.key) {
-          form[item.key] = defaultValue
+          let disabled = true
+          if (typeof item.disabled == 'function') {
+            disabled = item.disabled(this.form, item)
+          } else {
+            disabled = item.disabled
+          }
+          form[item.key] = isExclude && disabled ? form[item.key] : defaultValue
         }
       })
       return form
@@ -844,9 +850,9 @@ export default {
       })
     },
     // 清空 form 表单
-    reset() {
+    reset(isExclude = false) {
       this.clear()
-      this.form = this.initForm()
+      this.form = this.initForm(isExclude)
       this.$refs.form.resetFields()
     },
     // 清空验证
