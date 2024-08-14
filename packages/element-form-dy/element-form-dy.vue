@@ -148,7 +148,7 @@ export default {
   },
   methods: {
     // 默认值
-    initForm() {
+    initForm(isExclude) {
       let form = {}
       let map = {
         'input': '',
@@ -793,9 +793,9 @@ export default {
       })
     },
     // 清空 form 表单
-    reset() {
+    reset(isExclude) {
       this.clear()
-      this.form = this.initForm()
+      this.form = this.initForm(isExclude)
       this.$refs.form.resetFields()
     },
     // 清空验证
