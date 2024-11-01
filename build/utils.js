@@ -119,6 +119,6 @@ exports.cdnLoader = (prod = false) => {
     ],
     prod,
     publicPath: '/node_modules',
-    prodUrl: '//cdn.jsdelivr.net/npm/:name@:version/:path'
+    prodUrl: 'https://unpkg.com/:name@:version/:path'
   }
 }
