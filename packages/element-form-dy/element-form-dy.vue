@@ -155,8 +155,13 @@ export default {
         'select': null,
         'checkbox': false,
         'checkbox-group': [],
-        'date': new Date(),
-        'datetime': new Date(),
+        'date': '',
+        'dates': '',
+        'week': '',
+        'month': '',
+        'year': '',
+        'monthrange': [],
+        'datetime': '',
         'daterange': [],
         'datetimerange': [],
         'time': '',
@@ -361,16 +366,15 @@ export default {
           content = this.renderCheckboxGroup(h, item)
           break
         case 'date':
-          content = this.renderDatePicker(h, item)
-          break
+        case 'dates':
+        case 'week':
+        case 'month':
+        case 'year':
         case 'datetime':
-          content = this.renderDatePicker(h, item)
-          break
         case 'daterange':
-          content = this.renderDateRange(h, item)
-          break
         case 'datetimerange':
-          content = this.renderDateRange(h, item)
+        case 'monthrange':
+          content = this.renderDatePicker(h, item)
           break
         case 'time':
           content = this.renderTimePicker(h, item)
@@ -566,22 +570,8 @@ export default {
     },
     // 渲染 datepicker
     renderDatePicker(h, item) {
-      let tag = {
-        h,
-        item,
-        tagName: getPrefix('date-picker'),
-        props: {
-          clearable: this.clearable,
-          type: item.type,
-          ...(item.props || {})
-        }
-      }
-      return this.generateTag(tag)
-    },
-    // 渲染范围的 daterange
-    renderDateRange(h, item) {
       // 处理 datetimerange 可能宽度不够的问题
-      if (item.type === 'datetimerange') {
+      if (item.type.indexOf('range') !== -1) {
         item.width = item.width || 360
       }
       let tag = {
