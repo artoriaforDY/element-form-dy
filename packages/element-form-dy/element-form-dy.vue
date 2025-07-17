@@ -175,6 +175,9 @@ export default {
       this.formList.forEach(item => {
         let defaultValue = ''
         defaultValue = item.defaultValue !== undefined ? item.defaultValue : map[item.type]
+        if (item.type === 'select' && item.props && item.props.multiple) {
+          defaultValue = []
+        }
         if (item.key) {
           let disabled = true
           if (typeof item.disabled == 'function') {
@@ -775,6 +778,7 @@ export default {
       if (typeof item.onInput === 'function') {
         item.onInput(value, item, this.form, refObj, allRef)
       }
+      this.$emit('updateForm', this.form, refObj, allRef)
     },
     // 提交事件
     submit() {
