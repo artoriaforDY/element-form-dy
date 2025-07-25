@@ -195,6 +195,12 @@ export default {
           }
           form[item.key] = isExclude && disabled ? form[item.key] : defaultValue
         }
+        if (item.connect && Array.isArray(item.connect)) {
+          for (let i = 0; i < item.connect.length; i++) {
+            const it = item.connect[i]
+            form[it.key] = it.value
+          }
+        }
       })
       return form
     },
@@ -767,7 +773,7 @@ export default {
     formatDateValue(value, item) {
       switch (item.type) {
         case 'date':
-        case 'datetitme':
+        case 'datetime':
           if (!value) {
             value = ''
           }

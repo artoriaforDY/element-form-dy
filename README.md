@@ -1,4 +1,4 @@
-# xt-element-form
+# element-form-dy
 
 > 让 element-ui 的 form 使用起来更加简单。
 
@@ -156,8 +156,11 @@ export default {
 
 ## 更新日志
 
+### 1.9.1827
+1. 添加connect数组将其他信息写入form，用以支持双向绑定
+
 ### 1.9.1826
-1. 修复select类型的默认值处理，支持多选时默认值为数组；
+1. 修复select类型的默认值处理，支持多选时默认值为数组
 2. 值改变时触发updateForm事件
 
 ### 1.9.1823
