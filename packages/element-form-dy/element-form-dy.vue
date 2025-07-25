@@ -132,6 +132,14 @@ export default {
       this.$slots.default
     ])
   },
+  watch: {
+    form: {
+      handler(v) {
+        this.$emit('updateForm', v, this.getRefs())
+      },
+      deep: true
+    }
+  },
   computed: {
     rules() {
       let rules = {}
@@ -778,7 +786,6 @@ export default {
       if (typeof item.onInput === 'function') {
         item.onInput(value, item, this.form, refObj, allRef)
       }
-      this.$emit('updateForm', this.form, refObj, allRef)
     },
     // 提交事件
     submit() {
@@ -818,6 +825,9 @@ export default {
     },
     validateField (props, callback) {
       this.$refs.form.validateField(props, callback)
+    },
+    getRefs(){
+      return this.$refs
     }
   }
 }
