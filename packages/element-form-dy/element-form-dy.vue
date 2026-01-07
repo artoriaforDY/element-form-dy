@@ -250,7 +250,7 @@ export default {
         } else {
           hasRow = children.hasOwnProperty('hasRow') ? !!children.hasRow : true
         }
-        return !(!isShow && !hasRow)
+        return isShow || !isShow && hasRow
       })
       for (let i = 0; i < formList.length; i += grid) {
         let childrenList = []
@@ -291,7 +291,7 @@ export default {
         } else {
           hasRow = children.hasOwnProperty('hasRow') ? !!children.hasRow : true
         }
-        return !(!isShow && !hasRow)
+        return isShow || !isShow && hasRow
       })
       for (let i = 0; i < formList.length;) {
         let childrenList = []
@@ -334,7 +334,7 @@ export default {
         } else {
           hasRow = children.hasOwnProperty('hasRow') ? !!children.hasRow : true
         }
-        return !(!isShow && !hasRow)
+        return isShow || !isShow && hasRow
       })
       for (let i = 0; i < formList.length;) {
         let childrenList = []
